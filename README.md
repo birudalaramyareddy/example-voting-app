@@ -63,3 +63,20 @@ The voting application only accepts one vote per client browser. It does not reg
 This isn't an example of a properly architected perfectly designed distributed app... it's just a simple
 example of the various types of pieces and languages you might see (queues, persistent data, etc), and how to
 deal with them in Docker at a basic level.
+
+
+Implemented the application using azure self hosted agent:
+Below are the steps that need to run on the VM(I have taken ubuntu):
+1)sudo apt update
+2)sudo apt install docker.io - as we need docker files to be pulled and pushed)
+3)sudo usermod -aG docker $USER
+4)newgrp docker
+5)sudo chmod 660 /var/run/docker.sock
+6)sudo chown root:docker /var/run/docker.sock
+7)sudo systemctl restart docker
+8)configuring the VM as self hosted agent
+   mkdir myagent && cd myagent
+   sudo wget https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz
+   sudo tar zxvf vsts-agent-linux-x64-3.236.1.tar.gz
+   ./config.sh
+   ./run.sh
